@@ -1,6 +1,7 @@
 package basketball.com.sports;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -22,47 +23,53 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class WeixinFragment extends Fragment {
+public class WeixinFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     private ListView listView;
-   // private ArrayList<String> list = new ArrayList<String>();
-   private List<Map<String, Object>> list;
+    // private ArrayList<String> list = new ArrayList<String>();
+    private List<Map<String, Object>> list;
     private int i = 0;
 
+
     /**
-    @描述
-    在onCreateView中加载布局
-    */
+     * @描述 在onCreateView中加载布局
+     */
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
         View view = inflater.inflate(R.layout.tab01, container, false);
         listView = (ListView) view.findViewById(R.id.list);
 
-
-
-        SimpleAdapter adapter = new SimpleAdapter(getActivity(),getData(),R.layout.list_item,
-                new String[]{"title","info","img"},
-                new int[]{R.id.title,R.id.info,R.id.img}
+        SimpleAdapter adapter = new SimpleAdapter(getActivity(), getData(), R.layout.list_item,
+                new String[]{"title", "img"},
+                new int[]{R.id.title, R.id.img}
         );
         listView.setAdapter(adapter);
 
 
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-   //     String[] data = new String[] { "java", "C++", "JavaScript", "Php",
-       //         "Python" };
-     //   ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, data);
-      //  listView.setAdapter(arrayAdapter);
-        //   Log.i(data);
-        // return inflater.inflate(R.layout.tab01, container, false);
+             //   ListView listView = (ListView) parent;
+              //  Fruit fruit = (Fruit) listView.getItemAtPosition(position);
+              //  String name = fruit.getName();
+
+                Intent intent = new Intent(getActivity(), ListActivity.class);
+
+                Bundle bundle = new Bundle();
+                bundle.putLong("id", id);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                Toast.makeText(getActivity(), "id = "+id, Toast.LENGTH_SHORT).show();
+                //FruitList.this.finish();
+            }
+        });
+
         return view;
     }
-
-
 
 
 //    private List<String> getData() {
@@ -77,24 +84,52 @@ public class WeixinFragment extends Fragment {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("title", "G1");
-        map.put("info", "google 1");
-        map.put("img", R.drawable.ic_launcher);
+        map.put("title", "运球");
+        map.put("img", R.drawable.yunqiu);
         list.add(map);
 
         map = new HashMap<String, Object>();
-        map.put("title", "G2");
-        map.put("info", "google 2");
-        map.put("img", R.drawable.ic_launcher);
+        map.put("title", "上篮");
+        map.put("img", R.drawable.shanglan);
         list.add(map);
 
         map = new HashMap<String, Object>();
-        map.put("title", "G3");
-        map.put("info", "google 3");
-        map.put("img", R.drawable.ic_launcher);
+        map.put("title", "投篮");
+        map.put("img", R.drawable.toulan);
         list.add(map);
 
+        map = new HashMap<String, Object>();
+        map.put("title", "进攻");
+        map.put("img", R.drawable.jinggong);
+        list.add(map);
+
+        map = new HashMap<String, Object>();
+        map.put("title", "防守");
+        map.put("img", R.drawable.fangshou);
+        list.add(map);
+
+        map = new HashMap<String, Object>();
+        map.put("title", "篮板");
+        map.put("img", R.drawable.lanban);
+        list.add(map);
+
+        map = new HashMap<String, Object>();
+        map.put("title", "传球");
+        map.put("img", R.drawable.chuanqiu);
+        list.add(map);
+
+        map = new HashMap<String, Object>();
+        map.put("title", "弹跳");
+        map.put("img", R.drawable.tantiao);
+        list.add(map);
         return list;
+
+
     }
 
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+    }
 }
