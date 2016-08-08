@@ -48,27 +48,29 @@ public class WeixinFragment extends Fragment implements AdapterView.OnItemClickL
         listView.setAdapter(adapter);
 
 
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-             //   ListView listView = (ListView) parent;
-              //  Fruit fruit = (Fruit) listView.getItemAtPosition(position);
-              //  String name = fruit.getName();
+                HashMap<String, String> map = (HashMap<String, String>) listView.getItemAtPosition(position);
+                String title = map.get("title");
 
                 Intent intent = new Intent(getActivity(), ListActivity.class);
-
                 Bundle bundle = new Bundle();
                 bundle.putLong("id", id);
+                bundle.putString("title", title);
+                int realPosition = (int) id;
+
+
                 intent.putExtras(bundle);
                 startActivity(intent);
-                Toast.makeText(getActivity(), "id = "+id, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "id = " + id, Toast.LENGTH_SHORT).show();
                 //FruitList.this.finish();
             }
         });
 
         return view;
+
     }
 
 
