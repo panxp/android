@@ -82,21 +82,21 @@ public class ListActivity extends AppCompatActivity implements Callback<ArrayLis
 
     @Override
     public void onResponse(Call<ArrayList<Video>> call, Response<ArrayList<Video>> response) {
-        ArrayList<Video> list = response.body();
+
+        final ArrayList<Video> list = response.body();
         VideoAdapter adapter = new VideoAdapter(this, list, R.layout.list_video_item);
         listView.setAdapter(adapter);
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            //    HashMap<String, String> map = (HashMap<String, String>)listView.getSelectedItem();
+                String url = list.get(position).getUrl();
+                //    HashMap<String, String> map = (HashMap<String, String>)listView.getSelectedItem();
                 //Object o = listView.getItemAtPosition(position);
-              //  VideoAdapter fullObject = (VideoAdapter)o;
+                //  VideoAdapter fullObject = (VideoAdapter)o;
                 //((VideoAdapter) o));
                 //  ArrayList<List> list = (ArrayList<List>) listView.getItemAtPosition(position);
                 //  for (int i =0;i<list.size();i++){
-               // Toast.makeText(ListActivity.this, "title = " + map.get("title"), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ListActivity.this, "title = " + url, Toast.LENGTH_SHORT).show();
                 //  }
                 //  String title = list.get();
                 Intent intent = new Intent(ListActivity.this, VideoActivity.class);
