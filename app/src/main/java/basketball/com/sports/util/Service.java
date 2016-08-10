@@ -19,8 +19,8 @@ public interface Service {
     @GET("/")//网址下面的子目录
     Call<String> getBaidu();
 
-    @GET("scenics/video")//网址下面的子目录   category表示分类，因为子目录只有一点不一样
-    Call<ArrayList<Video>> getList();
+    @GET("scenics/video/{category}")//网址下面的子目录   category表示分类，因为子目录只有一点不一样
+    Call<ArrayList<Video>> getList(@Path("category") Long category);
 
     @POST("/api/{category}/list")//使用Post实现
     @FormUrlEncoded  //使用Field属性必须添加这个

@@ -62,7 +62,7 @@ public class ListActivity extends AppCompatActivity implements Callback<ArrayLis
                 .addConverterFactory(GsonConverterFactory.create()).build();
         basketball.com.sports.util.Service service = retrofit.create(basketball.com.sports.util.Service.class);
 
-        Call<ArrayList<Video>> call = service.getList();
+        Call<ArrayList<Video>> call = service.getList(id);
 
         call.enqueue(ListActivity.this);
         listView = (ListView) findViewById(R.id.list_video);
