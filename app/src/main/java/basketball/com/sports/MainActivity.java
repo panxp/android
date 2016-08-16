@@ -5,11 +5,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.TextViewCompat;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class MainActivity extends FragmentActivity implements OnClickListener {
     private LinearLayout mTabWeixin;
@@ -25,6 +27,8 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
     private Fragment mTab01;
     private Fragment mTab02;
     private Fragment mTab03;
+
+    private TextView title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +53,10 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
         mTabFrd = (LinearLayout) findViewById(R.id.id_tab_frd);
         mTabAddress = (LinearLayout) findViewById(R.id.id_tab_address);
 
-
         mImgWeixin = (ImageButton) findViewById(R.id.id_tab_weixin_img);
         mImgFrd = (ImageButton) findViewById(R.id.id_tab_frd_img);
         mImgAddress = (ImageButton) findViewById(R.id.id_tab_address_img);
+        title = (TextView) findViewById(R.id.top_title);
 
     }
 
@@ -65,34 +69,38 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
         switch (i) {
             case 0:
                 if (mTab01 == null) {
-                    mTab01 = new WeixinFragment();
+                    mTab01 = new CategoryFragment();
                     transaction.add(R.id.id_content, mTab01);
                 } else {
                     transaction.show(mTab01);
                 }
                 mImgWeixin.setImageResource(R.drawable.tab_weixin_pressed);
+                title.setText("篮球教学");
                 break;
             case 1:
                 if (mTab02 == null) {
-                    mTab02 = new FrdFragment();
+                    mTab02 = new AlbumFragment();
                     transaction.add(R.id.id_content, mTab02);
                 } else {
                     transaction.show(mTab02);
 
                 }
                 mImgFrd.setImageResource(R.drawable.tab_find_frd_pressed);
+
+
+                title.setText("经典专辑");
+
                 break;
             case 2:
                 if (mTab03 == null) {
-                    mTab03 = new AddressFragment();
+                    mTab03 = new AboutusFragment();
                     transaction.add(R.id.id_content, mTab03);
                 } else {
                     transaction.show(mTab03);
                 }
                 mImgAddress.setImageResource(R.drawable.tab_address_pressed);
+                title.setText("关于我们");
                 break;
-
-
             default:
                 break;
         }

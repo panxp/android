@@ -96,7 +96,7 @@ public class ListActivity extends AppCompatActivity implements Callback<ArrayLis
                 //((VideoAdapter) o));
                 //  ArrayList<List> list = (ArrayList<List>) listView.getItemAtPosition(position);
                 //  for (int i =0;i<list.size();i++){
-                Toast.makeText(ListActivity.this, "title = " + video_url, Toast.LENGTH_SHORT).show();
+               // Toast.makeText(ListActivity.this, "title = " + video_url, Toast.LENGTH_SHORT).show();
                 //  }
                 //  String title = list.get();
                 Intent intent = new Intent(ListActivity.this, VideoActivity.class);
@@ -122,15 +122,6 @@ public class ListActivity extends AppCompatActivity implements Callback<ArrayLis
     // Toast.makeText(this, "abc"+str+title ,Toast.LENGTH_SHORT).show();
 
 
-    private List<Map<String, Object>> getData(List list) {
-        List<Map<String, Object>> list2 = new ArrayList<>();
-        Map<String, Object> map = new HashMap<>();
-        map.put("title", "从菜鸟到高手的篮球训练控球1");
-        map.put("time", "31:19");
-        map.put("img", R.drawable.one11);
-        list2.add(map);
-        return list;
-    }
 
 
 }
