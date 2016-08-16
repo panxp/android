@@ -89,14 +89,14 @@ public class ListActivity extends AppCompatActivity implements Callback<ArrayLis
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String url = list.get(position).getUrl();
+                String video_url = list.get(position).getUrl();
                 //    HashMap<String, String> map = (HashMap<String, String>)listView.getSelectedItem();
                 //Object o = listView.getItemAtPosition(position);
                 //  VideoAdapter fullObject = (VideoAdapter)o;
                 //((VideoAdapter) o));
                 //  ArrayList<List> list = (ArrayList<List>) listView.getItemAtPosition(position);
                 //  for (int i =0;i<list.size();i++){
-                Toast.makeText(ListActivity.this, "title = " + url, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ListActivity.this, "title = " + video_url, Toast.LENGTH_SHORT).show();
                 //  }
                 //  String title = list.get();
                 Intent intent = new Intent(ListActivity.this, VideoActivity.class);
@@ -104,6 +104,7 @@ public class ListActivity extends AppCompatActivity implements Callback<ArrayLis
                 Bundle bundle = new Bundle();
                 bundle.putLong("id", id);
                 bundle.putString("title", "title");
+                bundle.putString("video_url",video_url);
                 int realPosition = (int) id;
 
 

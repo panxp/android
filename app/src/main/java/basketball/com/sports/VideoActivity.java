@@ -1,5 +1,6 @@
 package basketball.com.sports;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Build;
@@ -34,6 +35,8 @@ public class VideoActivity extends AppCompatActivity {
             getSupportActionBar().hide();
         }
         setContentView(R.layout.activity_video);
+        Intent intent = getIntent();
+        String video_url = intent.getStringExtra("video_url");
 
         /**
          Uri uri = Uri.parse("http://www.miaopai.com/show/BwYZFrHAyQSobrFqU1jCaw__.swf");
@@ -49,7 +52,7 @@ public class VideoActivity extends AppCompatActivity {
             //18 = JellyBean MR2, KITKAT=19
             webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         }
-        webView.loadUrl(Url);
+        webView.loadUrl(video_url);
 
 
     }
