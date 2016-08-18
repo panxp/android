@@ -83,7 +83,7 @@ public class ListActivity extends AppCompatActivity implements Callback<ArrayLis
 
         // Call<List<Video>> repos = service.listRepos("2");
         //System.out.println(repos);
-        Log.i("abc", "-------------");
+       // Log.i("abc", "-------------");
         // Log.i(repos.toString());
     }
 
@@ -94,8 +94,6 @@ public class ListActivity extends AppCompatActivity implements Callback<ArrayLis
         map.put("title", "加载中...");
         map.put("img", R.drawable.yunqiu);
         list.add(map);
-
-
         return list;
 
 
