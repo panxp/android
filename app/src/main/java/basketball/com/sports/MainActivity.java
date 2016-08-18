@@ -11,7 +11,12 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.baidu.mobads.AdSettings;
+import com.baidu.mobads.AdView;
+import com.umeng.analytics.MobclickAgent;
 
 public class MainActivity extends FragmentActivity implements OnClickListener {
     private LinearLayout mTabWeixin;
@@ -37,8 +42,27 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
         setContentView(R.layout.activity_main);
         initView();
         initEvent();
-
         setSelect(0);
+        initBaiduAdv();
+
+    }
+
+    private void initBaiduAdv() {
+        //RelativeLayout your_original_layout = new RelativeLayout(this); setContentView(your_original_layout); //人群属性
+        //AdSettings.setKey(new String[]{"baidu","中国"});
+//创建广告view
+        //String adPlaceID = "Your_adPlaceId";//重要：请填上你的代码位ID,否则无法请求到广告
+      //  adView = new AdView(this, adPlaceID);
+
+    }
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     private void initEvent() {
@@ -146,6 +170,15 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
         mImgWeixin.setImageResource(R.drawable.tab_weixin_normal);
         mImgFrd.setImageResource(R.drawable.tab_find_frd_normal);
         mImgAddress.setImageResource(R.drawable.tab_address_normal);
+    }
+
+    /**
+     * Activity销毁时，销毁adView
+     */
+    @Override
+    protected void onDestroy() {
+       // adView.destroy();
+        super.onDestroy();
     }
 
 }

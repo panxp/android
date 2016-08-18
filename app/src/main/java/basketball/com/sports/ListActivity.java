@@ -1,6 +1,5 @@
 package basketball.com.sports;
 
-import android.app.Service;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,13 +7,13 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
+import com.umeng.analytics.MobclickAgent;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,7 +34,6 @@ public class ListActivity extends AppCompatActivity implements Callback<ArrayLis
     private ListView listView;
     private List<Map<String, Object>> list;
 
-    //
 
 
     @Override
@@ -48,6 +46,10 @@ public class ListActivity extends AppCompatActivity implements Callback<ArrayLis
         }
         setContentView(R.layout.activity_list);
 
+
+
+
+        Toast.makeText(ListActivity.this, "正在加载...", Toast.LENGTH_SHORT).show();
         Intent intent = getIntent();
         Long id = intent.getLongExtra("id", 100);
 
@@ -56,6 +58,17 @@ public class ListActivity extends AppCompatActivity implements Callback<ArrayLis
         textViewTitle.setText(title);
         //  Toast.makeText(ListActivity.this, "title = "+title, Toast.LENGTH_SHORT).show();
         // View view = inflater.inflate(R.layout.activity_list, container, false);
+      //  57b4205ee0f55a34bb000ca2
+        //af2a2963
+
+
+        listView = (ListView) findViewById(R.id.list_video);
+
+        SimpleAdapter adapter = new SimpleAdapter(this, getData(), R.layout.list_item,
+                new String[]{"title", "img"},
+                new int[]{R.id.title, }
+        );
+        listView.setAdapter(adapter);
 
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl("http://api.dev.qiwei.com/")
@@ -65,7 +78,7 @@ public class ListActivity extends AppCompatActivity implements Callback<ArrayLis
         Call<ArrayList<Video>> call = service.getList(id);
 
         call.enqueue(ListActivity.this);
-        listView = (ListView) findViewById(R.id.list_video);
+
 
 
         // Call<List<Video>> repos = service.listRepos("2");
@@ -74,7 +87,19 @@ public class ListActivity extends AppCompatActivity implements Callback<ArrayLis
         // Log.i(repos.toString());
     }
 
+    private List<Map<String, Object>> getData() {
+        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("title", "加载中...");
+        map.put("img", R.drawable.yunqiu);
+        list.add(map);
+
+
+        return list;
+
+
+    }
     @Override
     public void onFailure(Call<ArrayList<Video>> call, Throwable t) {
         Log.i("failed", t.getMessage());
@@ -86,6 +111,8 @@ public class ListActivity extends AppCompatActivity implements Callback<ArrayLis
         final ArrayList<Video> list = response.body();
         VideoAdapter adapter = new VideoAdapter(this, list, R.layout.list_video_item);
         listView.setAdapter(adapter);
+
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -96,7 +123,7 @@ public class ListActivity extends AppCompatActivity implements Callback<ArrayLis
                 //((VideoAdapter) o));
                 //  ArrayList<List> list = (ArrayList<List>) listView.getItemAtPosition(position);
                 //  for (int i =0;i<list.size();i++){
-               // Toast.makeText(ListActivity.this, "title = " + video_url, Toast.LENGTH_SHORT).show();
+                // Toast.makeText(ListActivity.this, "title = " + video_url, Toast.LENGTH_SHORT).show();
                 //  }
                 //  String title = list.get();
                 Intent intent = new Intent(ListActivity.this, VideoActivity.class);
@@ -104,7 +131,7 @@ public class ListActivity extends AppCompatActivity implements Callback<ArrayLis
                 Bundle bundle = new Bundle();
                 bundle.putLong("id", id);
                 bundle.putString("title", "title");
-                bundle.putString("video_url",video_url);
+                bundle.putString("video_url", video_url);
                 int realPosition = (int) id;
 
 
@@ -117,11 +144,22 @@ public class ListActivity extends AppCompatActivity implements Callback<ArrayLis
 
         });
     }
-
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
 
     // Toast.makeText(this, "abc"+str+title ,Toast.LENGTH_SHORT).show();
-
-
-
+    /**
+     * Activity销毁时，销毁adView
+     */
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
 }

@@ -12,6 +12,8 @@ import android.webkit.WebView;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
+import com.umeng.analytics.MobclickAgent;
+
 public class VideoActivity extends AppCompatActivity {
     private String Url = "http://player.youku.com/embed/XMTY3MTk0NDg1Mg==";
     @Override
@@ -22,9 +24,19 @@ public class VideoActivity extends AppCompatActivity {
         if (getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         }
-
         super.onResume();
+        MobclickAgent.onPageStart("VideoActivity"); //统计页面(仅有Activity的应用中SDK自动调用，不需要单独写。"SplashScreen"为页面名称，可自定义)
+        MobclickAgent.onResume(this);
+
+
     }
+
+
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,5 +67,14 @@ public class VideoActivity extends AppCompatActivity {
         webView.loadUrl(video_url);
 
 
+    }
+
+
+    /**
+     * Activity销毁时，销毁adView
+     */
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

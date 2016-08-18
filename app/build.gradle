@@ -26,11 +26,13 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.squareup.picasso:picasso:2.3.2'
+
+    compile 'com.umeng.analytics:analytics:latest.integration'
 //    compile 'com.squareup.retrofit2:converter-simplexml:2.1.0'
     compile ('com.squareup.retrofit2:converter-simplexml:2.1.0'){
         exclude group: 'xpp3', module: 'xpp3'
         exclude group: 'stax', module: 'stax-api'
         exclude group: 'stax', module: 'stax'
     }
-
+    compile files('libs/Baidu_MobAds_SDK.jar')
 }

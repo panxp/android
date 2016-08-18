@@ -13,6 +13,8 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.umeng.analytics.MobclickAgent;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +22,16 @@ import java.util.Map;
 
 public class AlbumFragment extends Fragment implements AdapterView.OnItemClickListener {
     private ListView listView;
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("AlbumFragment"); //统计页面，"MainScreen"为页面名称，可自定义
+    }
+
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("AlbumFragment");
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,7 +65,7 @@ public class AlbumFragment extends Fragment implements AdapterView.OnItemClickLi
 
                 intent.putExtras(bundle);
                 startActivity(intent);
-           //     Toast.makeText(getActivity(), "id = " + id, Toast.LENGTH_SHORT).show();
+                //     Toast.makeText(getActivity(), "id = " + id, Toast.LENGTH_SHORT).show();
                 //FruitList.this.finish();
             }
         });
@@ -66,21 +78,21 @@ public class AlbumFragment extends Fragment implements AdapterView.OnItemClickLi
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("title", "NBA明星教学");
+        map.put("title", "NBA明星教学"); //1000
         map.put("img", R.drawable.all_star);
         list.add(map);
 
         map = new HashMap<String, Object>();
-        map.put("title", "乔丹篮球教学");
+        map.put("title", "乔丹篮球教学"); //1001
         map.put("img", R.drawable.qiaodan);
         list.add(map);
 
         map = new HashMap<String, Object>();
-        map.put("title", "91篮球教学");
+        map.put("title", "91篮球教学"); //1002
         map.put("img", R.drawable.jiuyilanqiu);
         list.add(map);
         map = new HashMap<String, Object>();
-        map.put("title", "加农贝克篮球教学");
+        map.put("title", "加农贝克篮球教学");//1003
         map.put("img", R.drawable.jialongbeike);
         list.add(map);
 
