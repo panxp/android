@@ -6,7 +6,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Window;
+import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.MediaController;
@@ -16,6 +18,7 @@ import com.umeng.analytics.MobclickAgent;
 
 public class VideoActivity extends AppCompatActivity {
     private String Url = "http://player.youku.com/embed/XMTY3MTk0NDg1Mg==";
+
     @Override
     protected void onResume() {
         /**
@@ -31,12 +34,12 @@ public class VideoActivity extends AppCompatActivity {
 
     }
 
-
-    public void onPause() {
+    @Override
+    protected void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
-    }
 
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,8 @@ public class VideoActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_video);
         Intent intent = getIntent();
         String video_url = intent.getStringExtra("video_url");
@@ -66,7 +71,6 @@ public class VideoActivity extends AppCompatActivity {
         }
         webView.loadUrl(video_url);
 
-
     }
 
 
@@ -75,6 +79,18 @@ public class VideoActivity extends AppCompatActivity {
      */
     @Override
     protected void onDestroy() {
+
         super.onDestroy();
+
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==KeyEvent.KEYCODE_BACK){
+            VideoActivity.this.finish();
+        }
+        WebView webView = (WebView) findViewById(R.id.webView);
+        
+        return super.onKeyDown(keyCode, event);
     }
 }

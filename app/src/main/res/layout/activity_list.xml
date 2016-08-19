@@ -24,6 +24,14 @@
 
     </LinearLayout>
 
+<TextView
+    android:id="@+id/loading"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:text="加载中..."
+    android:textSize="16dp"
+    android:gravity="center"
+    />
 
     <ListView
         android:id="@+id/list_video"
