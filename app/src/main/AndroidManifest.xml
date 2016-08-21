@@ -37,7 +37,12 @@
 
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+
+            android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar.TranslucentDecor"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar.TranslucentDecor"
+            android:theme="@android:style/Theme.Holo.NoActionBar.TranslucentDecor"
+            >
 
         </activity>
         <activity
