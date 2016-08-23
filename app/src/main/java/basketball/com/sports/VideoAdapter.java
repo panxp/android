@@ -71,8 +71,11 @@ public class VideoAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            inflator = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflator.inflate(resource, null);
+
+           // inflator = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = LayoutInflater.from(context).inflate(resource, null);
+         //    = inflator.inflate(resource, null);
+
             titleTextView = (TextView) convertView.findViewById(R.id.title);    //为了减少开销，则只在第一页时调用findViewById
             lengthTextView = (TextView) convertView.findViewById(R.id.length);
             imgImageView = (ImageView) convertView.findViewById(R.id.img);

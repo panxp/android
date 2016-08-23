@@ -1,6 +1,7 @@
 package basketball.com.sports;
 
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
@@ -45,11 +47,10 @@ public class ListActivity extends AppCompatActivity implements Callback<ArrayLis
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_list);
 
-
+        initWindow();
         //Toast.makeText(ListActivity.this, "正在加载...", Toast.LENGTH_SHORT).show();
         Intent intent = getIntent();
         Long id = intent.getLongExtra("id", 100);
@@ -64,7 +65,7 @@ public class ListActivity extends AppCompatActivity implements Callback<ArrayLis
         listView = (ListView) findViewById(R.id.list_video);
 
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://api.dev.qiwei.com/")
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://120.25.228.180:3089/")
                 .addConverterFactory(GsonConverterFactory.create()).build();
         basketball.com.sports.util.Service service = retrofit.create(basketball.com.sports.util.Service.class);
 
@@ -79,6 +80,18 @@ public class ListActivity extends AppCompatActivity implements Callback<ArrayLis
         // Log.i(repos.toString());
     }
 
+
+
+
+    private void initWindow() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.green_main_lcsq));
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            SystemBarTintManager tintManager = new SystemBarTintManager(this);
+            tintManager.setStatusBarTintResource(R.color.colorNavBar);
+            tintManager.setStatusBarTintEnabled(true);
+        }
+    }
     private List<Map<String, Object>> getData() {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 

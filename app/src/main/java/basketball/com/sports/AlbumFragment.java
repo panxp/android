@@ -95,6 +95,14 @@ public class AlbumFragment extends Fragment implements AdapterView.OnItemClickLi
         map.put("title", "加农贝克篮球教学");//1003
         map.put("img", R.drawable.jialongbeike);
         list.add(map);
+        map = new HashMap<String, Object>();
+        map.put("title", "张卫平篮球教学");//1004
+        map.put("img", R.drawable.zhangweiping);
+        list.add(map);
+        map = new HashMap<String, Object>();
+        map.put("title", "BetterBasketball篮球教学");//1005
+        map.put("img", R.drawable.betterbasketball);
+        list.add(map);
 
         map = new HashMap<String, Object>();
         map.put("title", "精典篮球教学大杂烩");

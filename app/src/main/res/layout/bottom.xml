@@ -5,6 +5,7 @@
     android:orientation="horizontal"
 
     android:background="@drawable/bottom_bar"
+
     >
 
     <LinearLayout
@@ -50,6 +51,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="经典专辑"
+            android:textColor="#333333" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/id_tab_referee"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <ImageButton
+            android:id="@+id/id_tab_referee_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#f1f1f1"
+            android:clickable="false"
+            android:src="@drawable/tab_caipan_normal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="篮球裁判"
             android:textColor="#333333" />
     </LinearLayout>
 

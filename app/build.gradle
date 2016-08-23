@@ -22,17 +22,19 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.3.0'
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-    compile 'com.squareup.picasso:picasso:2.3.2'
 
-    compile 'com.umeng.analytics:analytics:latest.integration'
-//    compile 'com.squareup.retrofit2:converter-simplexml:2.1.0'
-    compile ('com.squareup.retrofit2:converter-simplexml:2.1.0'){
+    //    compile 'com.squareup.retrofit2:converter-simplexml:2.1.0'
+    compile('com.squareup.retrofit2:converter-simplexml:2.1.0') {
         exclude group: 'xpp3', module: 'xpp3'
         exclude group: 'stax', module: 'stax-api'
         exclude group: 'stax', module: 'stax'
     }
     compile files('libs/Baidu_MobAds_SDK.jar')
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.picasso:picasso:2.3.2'
+    compile 'com.umeng.analytics:analytics:latest.integration'
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+    compile 'com.android.support:support-v4:23.3.0'
 }
