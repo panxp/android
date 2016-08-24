@@ -50,7 +50,7 @@ public class RefereeFragment extends Fragment  implements AdapterView.OnItemClic
         listView = (ListView) view.findViewById(R.id.referee);
        // Log.i("===",listView==null?"nullll":"good");
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://120.25.228.180:3089/")
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://video.tibaing.com/")
                 .addConverterFactory(GsonConverterFactory.create()).build();
         basketball.com.sports.util.Service service = retrofit.create(basketball.com.sports.util.Service.class);
 

@@ -47,9 +47,7 @@ public class ListActivity extends AppCompatActivity implements Callback<ArrayLis
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-
         setContentView(R.layout.activity_list);
-
         initWindow();
         //Toast.makeText(ListActivity.this, "正在加载...", Toast.LENGTH_SHORT).show();
         Intent intent = getIntent();
@@ -65,7 +63,7 @@ public class ListActivity extends AppCompatActivity implements Callback<ArrayLis
         listView = (ListView) findViewById(R.id.list_video);
 
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://120.25.228.180:3089/")
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://video.tibaing.com/")
                 .addConverterFactory(GsonConverterFactory.create()).build();
         basketball.com.sports.util.Service service = retrofit.create(basketball.com.sports.util.Service.class);
 

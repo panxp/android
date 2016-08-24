@@ -1,27 +1,31 @@
 package basketball.com.sports;
 
-import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.TextViewCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.baidu.mobads.AdSettings;
-import com.baidu.mobads.AdView;
+import com.qq.e.ads.banner.ADSize;
+import com.qq.e.ads.banner.AbstractBannerADListener;
 import com.umeng.analytics.MobclickAgent;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
+
+
+import com.qq.e.ads.banner.BannerView;
+
 
 public class MainActivity extends FragmentActivity implements OnClickListener {
     private LinearLayout mTabWeixin;
@@ -40,17 +44,21 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
     private Fragment mTab04;
 
     private TextView title;
-    Toolbar toolbar;
+    BannerView bv;
+    ViewGroup bannerContainer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        bannerContainer = (ViewGroup) this.findViewById(R.id.bannerContainer);
         setContentView(R.layout.activity_main);
         initView();
         initEvent();
         setSelect(0);
         initWindow();
-        initBaiduAdv();
+        this.initBanner();
+        this.bv.loadAD();
 
     }
 
@@ -65,19 +73,29 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
         }
     }
 
-    private void initBaiduAdv() {
-        //RelativeLayout your_original_layout = new RelativeLayout(this); setContentView(your_original_layout); //人群属性
-        //AdSettings.setKey(new String[]{"baidu","中国"});
-//创建广告view
-        //String adPlaceID = "Your_adPlaceId";//重要：请填上你的代码位ID,否则无法请求到广告
-      //  adView = new AdView(this, adPlaceID);
+    private void initBanner() {
+        this.bv = new BannerView(this, ADSize.BANNER, Constants.APPID, Constants.BannerPosID);
+        bv.setRefresh(30);
+        bv.setADListener(new AbstractBannerADListener() {
 
+            @Override
+            public void onNoAD(int arg0) {
+                Log.i("AD_DEMO", "BannerNoAD，eCode=" + arg0);
+            }
+
+            @Override
+            public void onADReceiv() {
+                Log.i("AD_DEMO", "ONBannerReceive");
+            }
+        });
+        bannerContainer.addView(bv);
     }
 
     public void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
     }
+
     public void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
@@ -214,7 +232,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
      */
     @Override
     protected void onDestroy() {
-       // adView.destroy();
+        // adView.destroy();
         super.onDestroy();
     }
 
