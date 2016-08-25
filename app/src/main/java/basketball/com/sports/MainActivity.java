@@ -88,7 +88,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
                 Log.i("AD_DEMO", "ONBannerReceive");
             }
         });
-        bannerContainer.addView(bv);
+       // bannerContainer.addView(bv);
     }
 
     public void onResume() {

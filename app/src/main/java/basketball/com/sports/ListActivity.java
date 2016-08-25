@@ -90,17 +90,6 @@ public class ListActivity extends AppCompatActivity implements Callback<ArrayLis
             tintManager.setStatusBarTintEnabled(true);
         }
     }
-    private List<Map<String, Object>> getData() {
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("title", "加载中...");
-        map.put("img", R.drawable.yunqiu);
-        list.add(map);
-        return list;
-
-
-    }
 
     @Override
     public void onFailure(Call<ArrayList<Video>> call, Throwable t) {
@@ -109,14 +98,11 @@ public class ListActivity extends AppCompatActivity implements Callback<ArrayLis
 
     @Override
     public void onResponse(Call<ArrayList<Video>> call, Response<ArrayList<Video>> response) {
-
         final ArrayList<Video> list = response.body();
         VideoAdapter adapter = new VideoAdapter(this, list, R.layout.list_video_item);
         TextView loading = (TextView) findViewById(R.id.loading);
         loading.setVisibility(View.GONE);
         listView.setAdapter(adapter);
-
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -126,13 +112,9 @@ public class ListActivity extends AppCompatActivity implements Callback<ArrayLis
                 bundle.putLong("id", id);
                 bundle.putString("title", "title");
                 bundle.putString("video_url", video_url);
-                int realPosition = (int) id;
-
-
+               // int realPosition = (int) id;
                 intent.putExtras(bundle);
                 startActivity(intent);
-
-
                 //FruitList.this.finish();
             }
 

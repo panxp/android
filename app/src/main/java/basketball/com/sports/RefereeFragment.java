@@ -29,9 +29,11 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class RefereeFragment extends Fragment  implements AdapterView.OnItemClickListener, Callback<ArrayList<Video>> {
+public class RefereeFragment extends Fragment implements AdapterView.OnItemClickListener, Callback<ArrayList<Video>> {
     private ListView listView;
-    private ListView loading;
+    private TextView loading;
+    private View view;
+
     public void onResume() {
         super.onResume();
         MobclickAgent.onPageStart("RefereeFragment"); //统计页面，"MainScreen"为页面名称，可自定义
@@ -46,9 +48,9 @@ public class RefereeFragment extends Fragment  implements AdapterView.OnItemClic
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.tab04, container, false);
+        view = inflater.inflate(R.layout.tab04, container, false);
         listView = (ListView) view.findViewById(R.id.referee);
-       // Log.i("===",listView==null?"nullll":"good");
+        // Log.i("===",listView==null?"nullll":"good");
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl("http://video.tibaing.com/")
                 .addConverterFactory(GsonConverterFactory.create()).build();
@@ -71,13 +73,16 @@ public class RefereeFragment extends Fragment  implements AdapterView.OnItemClic
 
     @Override
     public void onResponse(Call<ArrayList<Video>> call, Response<ArrayList<Video>> response) {
-
         final ArrayList<Video> list = response.body();
-
         VideoAdapter adapter = new VideoAdapter(getActivity(), list, R.layout.list_video_item);
-        //View view = inflater.inflate(R.layout.list_video_item, container, false);
-      //  TextView loading =  view.findViewById(R.id.loading);
-       // loading.setVisibility(View.GONE);
+
+        for (int i = 0; i < list.size(); i++) {
+            Log.i("ssss", list.get(i).getTitle());
+        }
+
+        TextView loading = (TextView) view.findViewById(R.id.loading_referee);
+
+        loading.setVisibility(View.GONE);
 
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

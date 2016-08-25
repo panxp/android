@@ -81,8 +81,6 @@ public class VideoAdapter extends BaseAdapter {
             imgImageView = (ImageView) convertView.findViewById(R.id.img);
         }
         Video video = videos.get(position);
-
-
         titleTextView.setText(video.getTitle());
         Picasso.with(context).load(video.getCover()).into(imgImageView);
         lengthTextView.setText(video.getLength());
