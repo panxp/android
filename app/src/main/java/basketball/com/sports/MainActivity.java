@@ -86,9 +86,31 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
             @Override
             public void onADReceiv() {
                 Log.i("AD_DEMO", "ONBannerReceive");
+             //   bannerContainer.addView(bv);
             }
         });
-       // bannerContainer.addView(bv);
+        if (bv == null) {
+            Log.i("null", "aaa");
+        } else {
+            bannerContainer.addView(bv);
+            Log.i("ok", "bbbb");
+        }
+
+    }
+
+
+
+    private void doRefreshBanner() {
+        if (bv == null) {
+            initBanner();
+        }
+        bv.loadAD();
+    }
+
+    private void doCloseBanner() {
+        bannerContainer.removeAllViews();
+        bv.destroy();
+        bv = null;
     }
 
     public void onResume() {
