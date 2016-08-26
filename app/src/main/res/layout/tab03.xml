@@ -2,13 +2,51 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#f3f3f3"
+        android:orientation="horizontal"
+        android:clickable="true"
+        android:onClick="myClickMethod"
+        android:id="@+id/recommend_app"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+
+            android:gravity="center_vertical"
+            android:text="精品应用推荐"
+            android:textColor="#333333"
+
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_marginRight="10dp"
+            android:gravity="right"
+            android:text=">"
+            android:textSize="16dp"
+
+            />
+    </LinearLayout>
+
+
     <TextView
         android:id="@+id/aboutus"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:gravity="left"
         android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:gravity="left"
+        android:lineSpacingExtra="3dp"
+        android:lineSpacingMultiplier="2"
+        android:scrollbars="vertical"
         android:text="APP名称：篮球教学\n
 我们努力为广大篮球迷们提供最有效、最正确、最实用的篮球学习知识。\n
 免责申明：\n
@@ -17,12 +55,11 @@
 3、篮球教学不保证为向用户提供便利而设置的外部链接的准确性和完整性，同时，对于该等外部链接指向的不由篮球教学实际控制的任何的内容，篮球教学不承担任何责任。\n
 4、篮球教学所刊载的所有资料及图表仅供参考使用,用户明确同意其使用篮球教学网络服务所存在的风险将完全由其自己承担,本APP对用户不承担任何责任。\n
 "
-        android:textSize="14sp"
         android:textColor="#333333"
-        android:scrollbars="vertical"
-        android:lineSpacingExtra="3dp"
-        android:lineSpacingMultiplier="2"
+        android:textSize="14sp"
         android:textStyle="normal"
 
         />
+
+
 </LinearLayout>

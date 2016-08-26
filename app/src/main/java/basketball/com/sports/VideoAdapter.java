@@ -24,10 +24,6 @@ public class VideoAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater inflator;
 
-    private TextView titleTextView;
-    private TextView lengthTextView;
-    private ImageView imgImageView;
-    private String Url;
 
     /**
      * @param context  mainActivity
@@ -71,22 +67,27 @@ public class VideoAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-
-           // inflator = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = LayoutInflater.from(context).inflate(resource, null);
-         //    = inflator.inflate(resource, null);
-
-            titleTextView = (TextView) convertView.findViewById(R.id.title);    //为了减少开销，则只在第一页时调用findViewById
-            lengthTextView = (TextView) convertView.findViewById(R.id.length);
-            imgImageView = (ImageView) convertView.findViewById(R.id.img);
+            convertView = LayoutInflater.from(context).inflate(resource, parent, false);
+            convertView.setTag(new ViewHolder(convertView));
         }
+        ViewHolder holder = (ViewHolder) convertView.getTag();
         Video video = videos.get(position);
-        titleTextView.setText(video.getTitle());
-        Picasso.with(context).load(video.getCover()).into(imgImageView);
-        lengthTextView.setText(video.getLength());
-
-
+        holder.titleTextView.setText(video.getTitle());
+        holder.lengthTextView.setText(video.getLength());
+        Picasso.with(context).load(video.getCover()).into(holder.imgImageView);
         return convertView;
     }
-}
 
+
+    public static class ViewHolder {
+        private final ImageView imgImageView;
+        private final TextView titleTextView;
+        private final TextView lengthTextView;
+
+        public ViewHolder(View item) {
+            imgImageView = (ImageView) item.findViewById(R.id.img);
+            titleTextView = (TextView) item.findViewById(R.id.title);
+            lengthTextView = (TextView) item.findViewById(R.id.length);
+        }
+    }
+}

@@ -75,15 +75,11 @@ public class RefereeFragment extends Fragment implements AdapterView.OnItemClick
     public void onResponse(Call<ArrayList<Video>> call, Response<ArrayList<Video>> response) {
         final ArrayList<Video> list = response.body();
         VideoAdapter adapter = new VideoAdapter(getActivity(), list, R.layout.list_video_item);
-
-        for (int i = 0; i < list.size(); i++) {
-            Log.i("ssss", list.get(i).getTitle());
-        }
-
+//        for (int i = 0; i < list.size(); i++) {
+//            Log.i("ssss", list.get(i).getTitle());
+//        }
         TextView loading = (TextView) view.findViewById(R.id.loading_referee);
-
         loading.setVisibility(View.GONE);
-
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -94,10 +90,8 @@ public class RefereeFragment extends Fragment implements AdapterView.OnItemClick
                 bundle.putLong("id", id);
                 bundle.putString("title", "title");
                 bundle.putString("video_url", video_url);
-
                 intent.putExtras(bundle);
                 startActivity(intent);
-
 
                 //FruitList.this.finish();
             }
