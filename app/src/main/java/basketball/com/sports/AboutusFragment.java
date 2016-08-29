@@ -51,10 +51,9 @@ public class AboutusFragment extends Fragment {
     public void myClickMethod(View v) {
         switch (v.getId()) {
             case R.id.recommend_app:
-                Log.i("SSSS","----------");
-               // APPWall wall = new APPWall(getActivity(), Constants.APPID, Constants.APPWallPosID);
-              //  wall.setScreenOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-              //  wall.doShowAppWall();
+                APPWall wall = new APPWall(getActivity(), Constants.APPID, Constants.APPWallPosID);
+                wall.setScreenOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                wall.doShowAppWall();
                 break;
             default:
                 break;

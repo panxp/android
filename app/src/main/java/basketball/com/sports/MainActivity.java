@@ -51,12 +51,13 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        bannerContainer = (ViewGroup) this.findViewById(R.id.bannerContainer);
+
         setContentView(R.layout.activity_main);
         initView();
         initEvent();
         setSelect(0);
         initWindow();
+        bannerContainer = (ViewGroup) this.findViewById(R.id.bannerContainer);
         this.initBanner();
         this.bv.loadAD();
 
@@ -76,8 +77,8 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
     private void initBanner() {
         this.bv = new BannerView(this, ADSize.BANNER, Constants.APPID, Constants.BannerPosID);
         bv.setRefresh(30);
-        bv.setADListener(new AbstractBannerADListener() {
 
+        bv.setADListener(new AbstractBannerADListener() {
             @Override
             public void onNoAD(int arg0) {
                 Log.i("AD_DEMO", "BannerNoAD，eCode=" + arg0);
@@ -89,15 +90,11 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
              //   bannerContainer.addView(bv);
             }
         });
-        if (bv == null) {
-            Log.i("null", "aaa");
-        } else {
-            bannerContainer.addView(bv);
-            Log.i("ok", "bbbb");
-        }
+
+        bannerContainer.addView(this.bv);
+
 
     }
-
 
 
     private void doRefreshBanner() {
@@ -107,11 +104,6 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
         bv.loadAD();
     }
 
-    private void doCloseBanner() {
-        bannerContainer.removeAllViews();
-        bv.destroy();
-        bv = null;
-    }
 
     public void onResume() {
         super.onResume();
@@ -163,6 +155,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
                 }
                 mImgWeixin.setImageResource(R.drawable.tab_weixin_pressed);
                 title.setText("篮球教学");
+
                 break;
             case 1:
                 if (mTab02 == null) {
@@ -174,6 +167,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
                 }
                 mImgFrd.setImageResource(R.drawable.tab_find_frd_pressed);
                 title.setText("经典专辑");
+                doRefreshBanner();
                 break;
             case 2:
                 if (mTab03 == null) {
@@ -184,6 +178,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
                 }
                 mImgAddress.setImageResource(R.drawable.tab_address_pressed);
                 title.setText("关于我们");
+                doRefreshBanner();
                 break;
             case 3:
                 if (mTab04 == null) {
@@ -194,6 +189,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
                 }
                 mImgReferee.setImageResource(R.drawable.tab_caipan_pressed);
                 title.setText("篮球裁判");
+                doRefreshBanner();
                 break;
             default:
                 break;

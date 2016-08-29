@@ -14,6 +14,8 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import com.qq.e.ads.interstitial.AbstractInterstitialADListener;
+import com.qq.e.ads.interstitial.InterstitialAD;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ public class RefereeFragment extends Fragment implements AdapterView.OnItemClick
     private ListView listView;
     private TextView loading;
     private View view;
+    InterstitialAD iad;
 
     public void onResume() {
         super.onResume();
@@ -81,6 +84,7 @@ public class RefereeFragment extends Fragment implements AdapterView.OnItemClick
         TextView loading = (TextView) view.findViewById(R.id.loading_referee);
         loading.setVisibility(View.GONE);
         listView.setAdapter(adapter);
+        showAD();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -98,6 +102,30 @@ public class RefereeFragment extends Fragment implements AdapterView.OnItemClick
 
         });
 
+    }
+
+    private InterstitialAD getIAD() {
+        if (iad == null) {
+            iad = new InterstitialAD(getActivity(), Constants.APPID, Constants.InterteristalPosID);
+        }
+        return iad;
+    }
+
+    private void showAD() {
+        getIAD().setADListener(new AbstractInterstitialADListener() {
+
+            @Override
+            public void onNoAD(int arg0) {
+                Log.i("AD_DEMO", "LoadInterstitialAd Fail:" + arg0);
+            }
+
+            @Override
+            public void onADReceive() {
+                Log.i("AD_DEMO", "onADReceive");
+                iad.show();
+            }
+        });
+        iad.loadAD();
     }
 
     @Override
