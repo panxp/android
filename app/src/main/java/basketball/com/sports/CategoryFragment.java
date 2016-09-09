@@ -53,7 +53,6 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
         );
         listView.setAdapter(adapter);
 
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -66,8 +65,6 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
                 bundle.putLong("id", 100+id);
                 bundle.putString("title", title);
             //    int realPosition = (int) id;
-
-
                 intent.putExtras(bundle);
                 startActivity(intent);
                // Toast.makeText(getActivity(), "id = " + id, Toast.LENGTH_SHORT).show();

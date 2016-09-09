@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="basketball.com.sports">
+    package="basketball.com.sports"
+    android:versionCode="2"
+    android:versionName="1.0.1"
+    >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -17,9 +20,9 @@
         android:icon="@mipmap/icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
+
         android:theme="@style/AppTheme">
         <service android:name="com.qq.e.comm.DownloadService" android:exported="false"></service>
-
         <activity
             android:name="com.qq.e.ads.ADActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" >
@@ -56,11 +59,6 @@
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="sports" />
-        <meta-data
-            android:name="BaiduMobAd_APP_ID"
-            android:value="e866cfb0" />
-
-
     </application>
 
 </manifest>

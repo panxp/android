@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -14,6 +15,9 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.qq.e.ads.banner.ADSize;
+import com.qq.e.ads.banner.AbstractBannerADListener;
+import com.qq.e.ads.banner.BannerView;
 import com.qq.e.ads.interstitial.AbstractInterstitialADListener;
 import com.qq.e.ads.interstitial.InterstitialAD;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
@@ -40,6 +44,8 @@ public class ListActivity extends AppCompatActivity implements Callback<ArrayLis
     private ListView loading;
     private List<Map<String, Object>> list;
     InterstitialAD iad;
+    BannerView bv;
+    ViewGroup bannerContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +69,9 @@ public class ListActivity extends AppCompatActivity implements Callback<ArrayLis
         //  57b4205ee0f55a34bb000ca2
         //af2a2963
         listView = (ListView) findViewById(R.id.list_video);
-
+        bannerContainer = (ViewGroup) this.findViewById(R.id.bannerContainer);
+        this.initBanner();
+        this.bv.loadAD();
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl("http://video.tibaing.com/")
                 .addConverterFactory(GsonConverterFactory.create()).build();
@@ -77,6 +85,25 @@ public class ListActivity extends AppCompatActivity implements Callback<ArrayLis
     }
 
 
+    private void initBanner() {
+        this.bv = new BannerView(this, ADSize.BANNER, Constants.APPID, Constants.BannerPosID);
+        bv.setRefresh(30);
+
+        bv.setADListener(new AbstractBannerADListener() {
+            @Override
+            public void onNoAD(int arg0) {
+                Log.i("AD_DEMO", "BannerNoAD，eCode=" + arg0);
+            }
+
+            @Override
+            public void onADReceiv() {
+                Log.i("AD_DEMO", "ONBannerReceive");
+                //   bannerContainer.addView(bv);
+            }
+        });
+
+        bannerContainer.addView(this.bv);
+    }
 
 
     private InterstitialAD getIAD() {
@@ -126,7 +153,7 @@ public class ListActivity extends AppCompatActivity implements Callback<ArrayLis
         TextView loading = (TextView) findViewById(R.id.loading);
         loading.setVisibility(View.GONE);
         listView.setAdapter(adapter);
-        showAD();
+        //showAD();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -138,7 +165,7 @@ public class ListActivity extends AppCompatActivity implements Callback<ArrayLis
                 bundle.putString("video_url", video_url);
                // int realPosition = (int) id;
                 intent.putExtras(bundle);
-                startActivity(intent);
+                 startActivity(intent);
                 //FruitList.this.finish();
             }
 

@@ -92,8 +92,6 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
         });
 
         bannerContainer.addView(this.bv);
-
-
     }
 
 

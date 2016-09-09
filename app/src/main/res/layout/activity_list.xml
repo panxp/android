@@ -32,11 +32,18 @@
     android:textSize="16dp"
     android:gravity="center"
     />
-
+    <FrameLayout
+        android:id="@+id/bannerContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"></FrameLayout>
     <ListView
         android:id="@+id/list_video"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        ></ListView>
+
 
 
 </LinearLayout>
